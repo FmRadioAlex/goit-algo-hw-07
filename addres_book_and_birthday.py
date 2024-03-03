@@ -168,32 +168,32 @@ def s_birthday(args, book: AddressBook):
     
 def get_upcoming_birthdays(book:AddressBook):
 
-    happy_day=[]
+    
     one_person=[]
     for name, other in book.items():
         
         day_birthday=other.print_day()
-        
-        day_now=(dt.now())
-        day_happy=dt(day_now.year, day_birthday.month, day_birthday.day).date()
+        if day_birthday!=None:
+            day_now=(dt.now())
+            day_happy=dt(day_now.year, day_birthday.month, day_birthday.day).date()
 
-        
-        if(day_happy-day_now.date()).days < 0:
-            day_happy=dt(day_now.year+1, day_birthday.month, day_birthday.day).date()
-        elif(day_happy - day_now.date()).days < 7:
-            if(day_happy-day_now.date()).days == 6:
-                day_happy=day_happy+datetime.timedelta(days=1)
-            elif(day_happy-day_now.date()).days == 5:
-                day_happy=day_happy+datetime.timedelta(days=2)
-            one_person.append(name)
-            one_person.append(str(day_happy))
+            
+            if(day_happy-day_now.date()).days < 0:
+                day_happy=dt(day_now.year+1, day_birthday.month, day_birthday.day).date()
+            elif(day_happy - day_now.date()).days < 7:
+                if(day_happy-day_now.date()).days == 6:
+                    day_happy=day_happy+datetime.timedelta(days=1)
+                elif(day_happy-day_now.date()).days == 5:
+                    day_happy=day_happy+datetime.timedelta(days=2)
+                one_person.append(name)
+                one_person.append(str(day_happy))
         
     return one_person
     
 
 
 def help_command():
-    print(f"\n\nadd [ім'я]\nhello-виведе привіт \nclose|exit- закриє программу \nchange [Старий телефон] [Новий]- Міняє номер телефона\nphone [Номер телефона]-шукає по телефону\nadd-birthday [ім'я]-додає день народженя до контакту\nshow-birthday [ім'я]-показує коли день народження у контакта\nall-вивести увесь список\ncls-почитсити вікно")
+    print(f"\n\nadd [ім'я]\nhello-виведе привіт \nclose|exit- закриє программу \nchange [Ім'я] [Старий телефон] [Новий]- Міняє номер телефона\nphone [Номер телефона]-шукає по телефону\nadd-birthday [ім'я]-додає день народженя до контакту\nshow-birthday [ім'я]-показує коли день народження у контакта\nall-вивести увесь список\ncls-почитсити вікно")
 
 def main():
     os.system('cls')
@@ -242,6 +242,11 @@ def main():
         elif command in ["birthdays","bd"]:
                     
             print(get_upcoming_birthdays(book))
+
+        elif command=="fm":
+            print(f"А що ми тут робимо я тут слідкую  \n┬┴┬┴┤(･_├┬┴┬┴")
+
+
         elif command in ["cls","clear"]:
             os.system('cls')
         
